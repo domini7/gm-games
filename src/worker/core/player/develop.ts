@@ -40,7 +40,7 @@ export const bootstrapPot = async ({
 			return ovr;
 		}
 
-		return helpers.bound(Math.round(pot), 0, 100);
+		return helpers.bound(Math.round(pot), 0, 110);
 	}
 
 	const maxOvrs = [];

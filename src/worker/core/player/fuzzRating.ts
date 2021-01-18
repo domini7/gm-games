@@ -11,7 +11,7 @@ const fuzzRating = (rating: number, fuzz: number): number => {
 		fuzz = 0;
 	}
 
-	return Math.round(helpers.bound(rating + fuzz, 0, 100));
+	return Math.round(helpers.bound(rating + fuzz, 0, 110));
 };
 
 export default fuzzRating;
