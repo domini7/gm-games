@@ -27,7 +27,13 @@ const shootingFormula: RatingFormula = {
 
 		return 2;
 	},
-	changeLimits: () => [-3, 13],
+	changeLimits: age => {
+		if (age > 23) {
+			return [-3, 13];
+		}
+
+		return [0, 13];
+	},
 };
 const iqFormula: RatingFormula = {
 	ageModifier: (age: number) => {
@@ -61,7 +67,7 @@ const iqFormula: RatingFormula = {
 
 		// For 19: [-3, 32]
 		// For 23: [-3, 12]
-		return [-3, 7 + 5 * (24 - age)];
+		return [0, 7 + 5 * (24 - age)];
 	},
 };
 const ratingsFormulas: Record<Exclude<RatingKey, "hgt">, RatingFormula> = {
@@ -89,7 +95,13 @@ const ratingsFormulas: Record<Exclude<RatingKey, "hgt">, RatingFormula> = {
 
 			return -8;
 		},
-		changeLimits: () => [-12, 2],
+		changeLimits: age => {
+			if (age > 23) {
+				return [-12, 2];
+			}
+
+			return [0, 2];
+		},
 	},
 	jmp: {
 		ageModifier: (age: number) => {
@@ -111,7 +123,13 @@ const ratingsFormulas: Record<Exclude<RatingKey, "hgt">, RatingFormula> = {
 
 			return -10;
 		},
-		changeLimits: () => [-12, 2],
+		changeLimits: age => {
+			if (age > 23) {
+				return [-12, 2];
+			}
+
+			return [0, 2];
+		},
 	},
 	endu: {
 		ageModifier: (age: number) => {
@@ -133,7 +151,13 @@ const ratingsFormulas: Record<Exclude<RatingKey, "hgt">, RatingFormula> = {
 
 			return -8;
 		},
-		changeLimits: () => [-11, 19],
+		changeLimits: age => {
+			if (age > 23) {
+				return [-11, 19];
+			}
+
+			return [0, 19];
+		},
 	},
 	dnk: {
 		ageModifier: (age: number) => {
@@ -144,7 +168,13 @@ const ratingsFormulas: Record<Exclude<RatingKey, "hgt">, RatingFormula> = {
 
 			return 0.5;
 		},
-		changeLimits: () => [-3, 13],
+		changeLimits: age => {
+			if (age > 23) {
+				return [-3, 13];
+			}
+
+			return [0, 13];
+		},
 	},
 	ins: shootingFormula,
 	ft: shootingFormula,
@@ -154,15 +184,30 @@ const ratingsFormulas: Record<Exclude<RatingKey, "hgt">, RatingFormula> = {
 	diq: iqFormula,
 	drb: {
 		ageModifier: shootingFormula.ageModifier,
-		changeLimits: () => [-2, 5],
+		changeLimits: age => {
+			if (age > 23) {
+				return [-2, 5];
+			}
+			return [0, 5];
+		},
 	},
 	pss: {
 		ageModifier: shootingFormula.ageModifier,
-		changeLimits: () => [-2, 5],
+		changeLimits: age => {
+			if (age > 23) {
+				return [-2, 5];
+			}
+			return [0, 5];
+		},
 	},
 	reb: {
 		ageModifier: shootingFormula.ageModifier,
-		changeLimits: () => [-2, 5],
+		changeLimits: age => {
+			if (age > 23) {
+				return [-2, 5];
+			}
+			return [0, 5];
+		},
 	},
 };
 
@@ -205,6 +250,10 @@ const calcBaseChange = (age: number, coachingRank: number): number => {
 		} else {
 			val *= ((coachingRank - 1) * 0.5) / (g.get("numActiveTeams") - 1) + 0.75;
 		}
+	}
+
+	if (age < 24) {
+		Math.max(0, val);
 	}
 
 	return val;
