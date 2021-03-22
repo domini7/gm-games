@@ -219,6 +219,20 @@ const DangerZone = ({ autoSave, godMode, phase }: View<"dangerZone">) => {
 			</div>
 
 			<div className="col-md-6">
+				<h2>Console</h2>
+
+				<p>blah blah blah blah blah blah blah blah</p>
+
+				<div className="row">
+					<div className="form-group">
+						<textarea
+							id="command-line-interface"
+							className="form-control"
+							rows={7}
+						/>
+					</div>
+				</div>
+
 				<h2>Auto save</h2>
 
 				<p>
